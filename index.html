@@ -531,6 +531,39 @@
     .req-pill.sourcing { background:var(--color-info-light); color:var(--color-info); }
     .req-pill.financial { background:var(--vroozi-gold-light); color:var(--vroozi-gold-bright); }
     .req-pill.rejected { background:var(--color-destructive-light); color:var(--color-destructive); }
+    .req-pill.ordered { background:var(--color-success-light); color:var(--color-success); }
+    .req-pill.received { background:var(--color-info-light); color:var(--color-info); }
+    .req-pill.invoiced { background:var(--vroozi-gold-light); color:var(--vroozi-gold-bright); }
+    .req-pill.cancelled { background:rgba(232,168,32,0.12); color:var(--vroozi-gold-bright); }
+
+    /* ===== ORDER TRACKING TIMELINE ===== */
+    #screen-orders .req-card { cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+    .track-caret { width:16px; height:16px; color:var(--color-text-muted); flex-shrink:0; }
+    .track-header { padding:4px 0 16px; border-bottom:1px solid var(--color-border-light); }
+    .track-info { display:flex; align-items:center; justify-content:space-between; margin-top:10px; }
+    .track-supplier { font-size:var(--text-sm); font-weight:600; color:var(--color-text); }
+    .track-date-lbl { font-size:var(--text-xs); color:var(--color-text-muted); }
+    .track-section-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-text-muted); padding:22px 0 14px; }
+    .track-timeline { padding-left:26px; }
+    .track-step { position:relative; padding-bottom:26px; padding-left:10px; }
+    .track-step:last-child { padding-bottom:0; }
+    .track-step::before { content:''; position:absolute; left:-18px; top:18px; bottom:0; width:2px; background:var(--color-border); }
+    .track-step:last-child::before { display:none; }
+    .track-step.done::before { background:rgba(52,199,89,0.25); }
+    .track-dot { position:absolute; left:-26px; top:1px; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .track-dot svg { width:10px; height:10px; }
+    .track-step.done .track-dot { background:var(--color-success); }
+    .track-step.current .track-dot { background:var(--vroozi-gold); box-shadow:0 0 0 5px rgba(232,168,32,0.18); }
+    .track-step.upcoming .track-dot { background:transparent; border:2px solid var(--color-border); width:14px; height:14px; left:-24px; top:3px; }
+    .track-step.cancelled .track-dot { background:var(--color-destructive); }
+    .track-step-title { font-size:var(--text-sm); font-weight:600; color:var(--color-text); }
+    .track-step.current .track-step-title { color:var(--vroozi-gold-bright); font-weight:700; }
+    .track-step.upcoming .track-step-title { color:var(--color-text-muted); font-weight:500; }
+    .track-step.cancelled .track-step-title { color:var(--color-destructive); }
+    .track-step-date { font-size:var(--text-xs); color:var(--color-text-secondary); margin-top:1px; }
+    .track-step-desc { font-size:11px; color:var(--color-text-muted); margin-top:3px; line-height:1.4; }
+    @keyframes trackPulse { 0%,100%{box-shadow:0 0 0 5px rgba(232,168,32,0.18)} 50%{box-shadow:0 0 0 10px rgba(232,168,32,0.08)} }
+    .track-step.current .track-dot { animation:trackPulse 2.5s ease-in-out infinite; }
     .req-empty { text-align:center; color:var(--color-text-muted); font-size:var(--text-sm); padding:40px 20px; }
 
     /* ===== INBOX PAGE ===== */
@@ -642,7 +675,7 @@
       <div class="nav-item" data-screen="anomaly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Anomaly Detection<span class="nav-tag">AI</span></div>
       <div class="sidebar-label" style="margin-top:24px;">Reference</div>
       <div class="nav-item" data-screen="typography"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography<span class="nav-tag">DS</span></div>
-      <div class="sidebar-footer"><div class="sidebar-meta">v1.20.8 &middot; Vroozi AI Demo</div></div>
+      <div class="sidebar-footer"><div class="sidebar-meta">v1.21.1 &middot; Vroozi AI Demo</div></div>
     </aside>
     <div class="main-area">
       <span class="deck-railtext">Vroozi&nbsp;&nbsp;SpendTech&reg;</span>
@@ -680,6 +713,7 @@
             <div class="sidebar-label">Workspace</div>
             <div class="nav-item" data-screen="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</div>
             <div class="nav-item" data-screen="requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>Requests</div>
+            <div class="nav-item" data-screen="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 001 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Orders</div>
             <div class="nav-item" data-screen="inbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>Inbox<span class="nav-badge">4</span></div>
             <div class="sidebar-label">AI Actions</div>
             <div class="nav-item" data-screen="voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg>Voice Order</div>
@@ -688,7 +722,7 @@
             <div class="nav-item" data-screen="chatanalytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 13V9M12 13v-2M16 13V8"/></svg>Analytics Chat</div>
             <div class="nav-item" data-screen="spend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Spend Intel</div>
             <div class="nav-item" data-screen="anomaly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Anomaly Detection</div>
-            <div class="sidebar-footer"><div class="sidebar-meta">v1.20.8 &middot; Vroozi SpendTech&reg;</div></div>
+            <div class="sidebar-footer"><div class="sidebar-meta">v1.21.1 &middot; Vroozi SpendTech&reg;</div></div>
           </aside>
 
           <!-- HOME -->
@@ -727,6 +761,7 @@
               <div class="bottom-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</div>
               <div class="bottom-nav-item" id="navShop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Shop</div>
               <div class="bottom-nav-item" id="navRequests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>Requests</div>
+              <div class="bottom-nav-item" id="navOrders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 001 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Orders</div>
               <div class="bottom-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</div>
             </div>
 
@@ -912,6 +947,27 @@
             </div>
           </div>
 
+          <!-- PURCHASE ORDERS -->
+          <div class="screen-view requests-screen" id="screen-orders">
+            <div class="screen-topbar"><button class="back-btn" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg></button><span class="screen-topbar-title">Purchase Orders</span></div>
+            <div class="requests-body">
+              <div class="req-hero"><h2>Purchase Orders</h2><p>Purchase Orders owned by Shaz</p></div>
+              <div class="req-searchbar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <div class="req-status-chip" id="poStatusChip"><span class="lbl">Status:</span> <span class="val" id="poStatusVal">All</span> <span class="x" id="poStatusClear">&times;</span></div>
+                <span class="req-search-input">Search PO #, Supplier&hellip;</span>
+              </div>
+              <div class="req-dropdown" id="poDropdown"></div>
+              <div id="poList"></div>
+            </div>
+          </div>
+
+          <!-- PURCHASE ORDERS: TRACK ORDER -->
+          <div class="screen-view" id="screen-tracking">
+            <div class="screen-topbar"><button class="back-btn" data-nav="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg></button><span class="screen-topbar-title">Track Order</span></div>
+            <div class="requests-body" id="trackBody"></div>
+          </div>
+
           <!-- INBOX -->
           <div class="screen-view inbox-screen" id="screen-inbox">
             <div class="screen-topbar"><button class="back-btn" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg></button><span class="screen-topbar-title">Inbox</span></div>
@@ -922,7 +978,7 @@
                 <div class="inbox-tab" data-tab="notifs">Notifications<span class="ct" id="ctNotifs">4</span></div>
               </div>
               <div id="inboxList"></div>
-              <div class="inbox-version">v1.20.8 &middot; Vroozi AI Demo</div>
+              <div class="inbox-version">v1.21.1 &middot; Vroozi AI Demo</div>
             </div>
           </div>
 
@@ -991,6 +1047,8 @@
       else if(id==='snap') resetSnapDemo();
       else if(id==='anomaly') resetAnomalyDemo();
       else if(id==='requests') renderRequests();
+      else if(id==='orders') renderOrders();
+      else if(id==='tracking') renderTracking();
       else if(id==='inbox') renderInbox();
     }
     navItems.forEach(function(item){ tap(item, function(){ showScreen(item.dataset.screen); }); });
@@ -1769,6 +1827,134 @@
     tap($('reqStatusClear'), function(e){ if(e&&e.stopPropagation)e.stopPropagation(); reqFilter='All'; $('reqStatusVal').textContent='All'; closeReqDropdown(); drawReqList(); });
 
     // ============================================================
+    //  PURCHASE ORDERS PAGE
+    // ============================================================
+    var PO_STATUSES = ['All','Ordered','Received','Invoiced','Cancelled'];
+    var PO_DATA = [
+      { po:'2000000246', pr:'1000000866', date:'09/16/2024', supplier:'Amazon Business', name:'Shaz 1000000866', amt:'$2,904.99', status:'Ordered' },
+      { po:'2000000243', pr:'1000000871', date:'09/20/2024', supplier:'Grainger', name:'Nitrile Gloves XL \u00d7 200', amt:'$4,598.00', status:'Ordered' },
+      { po:'2000000238', pr:'1000000762', date:'08/20/2023', supplier:'Amazon Business', name:'Shaz 1000000762', amt:'$206.97', status:'Ordered' },
+      { po:'2000000233', pr:'1000000727', date:'04/22/2021', supplier:'Amazon Business', name:'Shaz 1000000727', amt:'$191.97', status:'Cancelled' },
+      { po:'2000000230', pr:'1000000723', date:'07/17/2020', supplier:'Grainger', name:'Safety Supplies \u2014 Warehouse', amt:'$1,239.00', status:'Ordered' },
+      { po:'2000000228', pr:'1000000722', date:'05/07/2020', supplier:'Amazon Business', name:'Shaz 1000000722', amt:'$1,689.99', status:'Ordered' },
+      { po:'2000000225', pr:'1000000720', date:'04/29/2020', supplier:'CDW', name:'Dell Dock + Monitor Bundle', amt:'$1,140.00', status:'Received' },
+      { po:'2000000220', pr:'1000000704', date:'10/30/2019', supplier:'Amazon Business', name:'Shaz 1000000704', amt:'$40.96', status:'Invoiced' },
+      { po:'2000000218', pr:'1000000700', date:'10/10/2019', supplier:'Staples', name:'Office Supplies Q3', amt:'$412.50', status:'Ordered' }
+    ];
+    var poFilter = 'All';
+    function poStatusIcon(s){
+      if(s==='Ordered')   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
+      if(s==='Received')  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 001 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>';
+      if(s==='Invoiced')  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>';
+      if(s==='Cancelled') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>';
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+    }
+    function renderOrders(){
+      poFilter='All'; $('poStatusVal').textContent='All'; closePODropdown();
+      drawPOList();
+    }
+    function drawPOList(){
+      var list=$('poList'); list.innerHTML='';
+      var rows = PO_DATA.filter(function(r){ return poFilter==='All' || r.status===poFilter; });
+      if(!rows.length){ list.innerHTML='<div class="req-empty">No orders match this filter.</div>'; return; }
+      rows.forEach(function(r){
+        var card=el('div','req-card');
+        card.innerHTML =
+          '<div class="req-card-top"><div><div class="req-num">PO-'+r.po+'</div><div class="req-name">'+r.name+'</div></div>'+
+          '<div style="display:flex;align-items:center;gap:6px"><div class="req-amt">'+r.amt+'</div><svg class="track-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div></div>'+
+          '<div class="req-card-bottom"><div class="req-meta"><span><b>'+r.supplier+'</b></span><span>'+r.date+'</span><span>PR #'+r.pr+'</span></div>'+
+          '<div class="req-pill '+statusClass(r.status)+'">'+poStatusIcon(r.status)+r.status+'</div></div>';
+        ;(function(po){ tap(card, function(){ selectedPO=po; showScreen('tracking'); }); })(r);
+        list.appendChild(card);
+      });
+    }
+    function openPODropdown(){
+      var dd=$('poDropdown'); dd.innerHTML='';
+      PO_STATUSES.forEach(function(s){
+        var o=el('div','req-dropopt'+(s===poFilter?' hl':''), s);
+        tap(o, function(){ poFilter=s; $('poStatusVal').textContent=s; closePODropdown(); drawPOList(); });
+        dd.appendChild(o);
+      });
+      var sc = window.__appScale || 1;
+      var chip=$('poStatusChip').getBoundingClientRect();
+      var host=$('screen-orders').getBoundingClientRect();
+      dd.style.left=((chip.left-host.left)/sc)+'px';
+      dd.style.top=((chip.bottom-host.top)/sc+6)+'px';
+      dd.classList.add('open');
+    }
+    function closePODropdown(){ $('poDropdown').classList.remove('open'); }
+    tap($('poStatusChip'), function(e){
+      if(e && e.stopPropagation) e.stopPropagation();
+      $('poDropdown').classList.contains('open') ? closePODropdown() : openPODropdown();
+    });
+    tap($('poStatusClear'), function(e){ if(e&&e.stopPropagation)e.stopPropagation(); poFilter='All'; $('poStatusVal').textContent='All'; closePODropdown(); drawPOList(); });
+
+    // ---- TRACK MY ORDER ----
+    var selectedPO = null;
+    var TRACK_LABELS = ['PR Approved','PO Created','Sent to Supplier','Supplier Confirmed','Shipped','Delivered','Invoice Received','Payment Processed'];
+    function makeSteps(done,dates,descs){
+      return TRACK_LABELS.map(function(l,i){
+        return { label:l, state: i<done?'done': i===done?'current':'upcoming', date:dates[i]||'', desc:descs[i]||'' };
+      });
+    }
+    var TRACKING = {};
+    TRACKING['2000000246'] = makeSteps(5,
+      ['09/14/2024','09/16/2024','09/16/2024','09/17/2024','09/19/2024'],
+      ['PR-1000000866 approved by Vroozi Approver','Purchase Order issued','EDI transmitted to Amazon Business','Amazon Business accepted the order','Tracking: AMZ-TRK-9928174']);
+    TRACKING['2000000243'] = makeSteps(4,
+      ['09/19/2024','09/20/2024','09/20/2024','09/21/2024'],
+      ['PR-1000000871 approved','PO issued for 200 boxes Nitrile Gloves XL','Transmitted to Grainger','Grainger confirmed \u2014 est. ship 09/25']);
+    TRACKING['2000000238'] = makeSteps(6,
+      ['08/18/2023','08/20/2023','08/20/2023','08/21/2023','08/24/2023','08/28/2023'],
+      ['PR-1000000762 approved','Purchase Order issued','Transmitted to Amazon Business','Amazon Business confirmed','Tracking: AMZ-TRK-7741023','Received at Boston warehouse']);
+    TRACKING['2000000233'] = [
+      {label:'PR Approved',state:'done',date:'04/20/2021',desc:'PR-1000000727 approved by Vroozi Approver'},
+      {label:'PO Created',state:'done',date:'04/22/2021',desc:'Purchase Order issued'},
+      {label:'Sent to Supplier',state:'done',date:'04/22/2021',desc:'Transmitted to Amazon Business'},
+      {label:'Order Cancelled',state:'cancelled',date:'04/25/2021',desc:'Cancelled \u2014 duplicate of existing order PO-2000000228'}
+    ];
+    TRACKING['2000000230'] = makeSteps(5,
+      ['07/15/2020','07/17/2020','07/17/2020','07/18/2020','07/22/2020'],
+      ['PR-1000000723 approved','PO issued for Safety Supplies','Transmitted to Grainger','Grainger confirmed','Tracking: GRG-SHP-44210']);
+    TRACKING['2000000228'] = makeSteps(6,
+      ['05/05/2020','05/07/2020','05/07/2020','05/08/2020','05/12/2020','05/15/2020'],
+      ['PR-1000000722 approved','Purchase Order issued','Transmitted to Amazon Business','Amazon Business confirmed','Tracking: AMZ-TRK-5519803','Received at main facility']);
+    TRACKING['2000000225'] = makeSteps(7,
+      ['04/27/2020','04/29/2020','04/29/2020','04/30/2020','05/06/2020','05/11/2020','05/18/2020'],
+      ['PR-1000000720 approved','PO issued for Dock + Monitor Bundle','Transmitted to CDW','CDW confirmed the order','Tracking: CDW-FRT-88312','Delivered to IT dept','Invoice #CDW-INV-20-4471 received']);
+    TRACKING['2000000220'] = makeSteps(8,
+      ['10/28/2019','10/30/2019','10/30/2019','10/31/2019','11/04/2019','11/07/2019','11/12/2019','11/20/2019'],
+      ['PR-1000000704 approved','Purchase Order issued','Transmitted to Amazon Business','Amazon Business confirmed','Tracking: AMZ-TRK-3302918','Received at office','Invoice #AMZ-INV-19-8804 received','Payment processed via ACH']);
+    TRACKING['2000000218'] = makeSteps(3,
+      ['10/08/2019','10/10/2019','10/10/2019'],
+      ['PR-1000000700 approved','PO issued for Office Supplies Q3','Transmitted to Staples']);
+
+    var dotCheck = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg>';
+    var dotX     = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+    function renderTracking(){
+      if(!selectedPO) return;
+      var r=selectedPO, steps=TRACKING[r.po];
+      if(!steps){ $('trackBody').innerHTML='<div class="req-empty">No tracking data available.</div>'; return; }
+      $('trackBody').innerHTML =
+        '<div class="track-header">'+
+          '<div class="req-num" style="font-size:var(--text-lg)">PO-'+r.po+'</div>'+
+          '<div class="req-name">'+r.name+'</div>'+
+          '<div class="track-info"><div><span class="track-supplier">'+r.supplier+'</span> <span class="track-date-lbl">'+r.date+'</span></div><div class="req-amt">'+r.amt+'</div></div>'+
+          '<div style="margin-top:10px"><div class="req-pill '+statusClass(r.status)+'">'+poStatusIcon(r.status)+r.status+'</div></div>'+
+        '</div>'+
+        '<div class="track-section-label">Order Timeline</div>'+
+        '<div class="track-timeline">'+steps.map(function(s){
+          var icon = s.state==='done'?dotCheck : s.state==='cancelled'?dotX : '';
+          return '<div class="track-step '+s.state+'"><div class="track-dot">'+icon+'</div><div class="track-step-content">'+
+            '<div class="track-step-title">'+s.label+'</div>'+
+            (s.date?'<div class="track-step-date">'+s.date+'</div>':'')+
+            (s.desc?'<div class="track-step-desc">'+s.desc+'</div>':'')+
+          '</div></div>';
+        }).join('')+'</div>';
+    }
+
+
+    // ============================================================
     //  INBOX PAGE  (tasks to review + notifications)
     // ============================================================
     var INBOX_TASKS = [
@@ -1830,6 +2016,7 @@
 
     // ---- NAVIGATION WIRING for new pages ----
     tap($('navRequests'), function(){ showScreen('requests'); });
+    tap($('navOrders'), function(){ showScreen('orders'); });
     tap($('homeInbox'), function(){ showScreen('inbox'); });
 
     // ---- INIT ----
