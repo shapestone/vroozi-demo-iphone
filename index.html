@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0A0C11">
+  <link rel="manifest" href='data:application/json,{"name":"Vroozi AI","short_name":"Vroozi AI","display":"standalone","start_url":".","background_color":"%230A0C11","theme_color":"%230A0C11"}'>
   <title>Vroozi AI Experience</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -580,7 +585,12 @@
     body.device-mode .sidebar,
     body.device-mode .context-bar { display:none; }
     body.device-mode .main-area { padding:0; }
-    body.device-mode .phone-frame { width:100%; height:100%; border-radius:0; padding:0; box-shadow:none; transform:none !important; }
+    body.device-mode .phone-frame {
+      position:fixed; inset:0; z-index:100;
+      width:100vw; height:100vh; height:100dvh;
+      border-radius:0; padding:0; box-shadow:none;
+      transform:none !important; transition:none;
+    }
     body.device-mode .phone-screen { border-radius:0; }
     body.device-mode .notch,
     body.device-mode .status-bar { display:none; }
@@ -591,6 +601,7 @@
     body.device-mode .reset-fab,
     body.device-mode .snap-screen .reset-fab,
     body.device-mode .anomaly-screen .reset-fab { top: calc(14px + env(safe-area-inset-top, 12px)); }
+    body.device-mode .bottom-nav { padding-bottom: max(28px, env(safe-area-inset-bottom, 28px)); }
   </style>
 </head>
 <body>
@@ -611,7 +622,7 @@
       <div class="nav-item" data-screen="anomaly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Anomaly Detection<span class="nav-tag">AI</span></div>
       <div class="sidebar-label" style="margin-top:24px;">Reference</div>
       <div class="nav-item" data-screen="typography"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography<span class="nav-tag">DS</span></div>
-      <div class="sidebar-footer"><div class="sidebar-meta">v1.20.5 &middot; NYC Event Demo</div></div>
+      <div class="sidebar-footer"><div class="sidebar-meta">v1.20.7 &middot; NYC Event Demo</div></div>
     </aside>
     <div class="main-area">
       <span class="deck-railtext">Vroozi&nbsp;&nbsp;SpendTech&reg;</span>
@@ -657,7 +668,7 @@
             <div class="nav-item" data-screen="chatanalytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 13V9M12 13v-2M16 13V8"/></svg>Analytics Chat</div>
             <div class="nav-item" data-screen="spend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Spend Intel</div>
             <div class="nav-item" data-screen="anomaly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Anomaly Detection</div>
-            <div class="sidebar-footer"><div class="sidebar-meta">v1.20.5 &middot; Vroozi SpendTech&reg;</div></div>
+            <div class="sidebar-footer"><div class="sidebar-meta">v1.20.7 &middot; Vroozi SpendTech&reg;</div></div>
           </aside>
 
           <!-- HOME -->
