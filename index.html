@@ -535,6 +535,7 @@
 
     /* ===== INBOX PAGE ===== */
     .inbox-body { flex:1; overflow-y:auto; min-height:0; -webkit-overflow-scrolling:touch; padding:8px 16px 100px; }
+    .inbox-version { text-align:center; font-size:var(--text-xs); color:rgba(255,255,255,0.22); padding:24px 0 0; }
     .inbox-tabs { display:flex; gap:7px; padding:4px 0 12px; }
     .inbox-tab { flex:1; text-align:center; padding:9px 4px; border-radius:var(--radius-lg); background:var(--color-surface); border:1px solid var(--color-border); font-size:var(--text-xs); font-weight:600; color:var(--color-text-secondary); cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; transition:all var(--transition-fast); }
     .inbox-tab .ct { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; margin-left:5px; border-radius:var(--radius-full); background:var(--color-surface-2); color:var(--color-text-muted); font-size:10px; font-weight:700; }
@@ -586,10 +587,10 @@
     body.device-mode .context-bar { display:none; }
     body.device-mode .main-area { padding:0; }
     body.device-mode .phone-frame {
-      position:fixed; inset:0; z-index:100;
-      width:100vw; height:100vh; height:100dvh;
-      border-radius:0; padding:0; box-shadow:none;
-      transform:none !important; transition:none;
+      position:fixed !important; inset:0 !important; z-index:100;
+      width:100vw !important; height:100vh !important; height:100dvh !important;
+      border-radius:0 !important; padding:0 !important; box-shadow:none !important;
+      transform:none !important; transition:none !important;
     }
     body.device-mode .phone-screen { border-radius:0; }
     body.device-mode .notch,
@@ -602,6 +603,25 @@
     body.device-mode .snap-screen .reset-fab,
     body.device-mode .anomaly-screen .reset-fab { top: calc(14px + env(safe-area-inset-top, 12px)); }
     body.device-mode .bottom-nav { padding-bottom: max(28px, env(safe-area-inset-bottom, 28px)); }
+
+    /* CSS-only fallback: if the primary pointer is touch, apply the critical
+       full-bleed rules immediately (no JS needed). Catches real devices and
+       DevTools emulation that sets media features but not maxTouchPoints. */
+    @media (hover: none) and (pointer: coarse) {
+      .sidebar, .context-bar { display:none !important; }
+      .phone-frame { position:fixed !important; inset:0 !important; width:100vw !important;
+        height:100vh !important; height:100dvh !important;
+        border-radius:0 !important; padding:0 !important; box-shadow:none !important;
+        transform:none !important; transition:none !important; z-index:100 !important; }
+      .phone-screen { border-radius:0 !important; }
+      .notch, .status-bar { display:none !important; }
+      .screen-topbar { padding-top: calc(12px + env(safe-area-inset-top, 12px)); }
+      .home-header { padding-top: calc(20px + env(safe-area-inset-top, 12px)); }
+      .home-inbox-btn { top: calc(10px + env(safe-area-inset-top, 8px)); }
+      .uso-top { padding-top: calc(14px + env(safe-area-inset-top, 12px)); }
+      .reset-fab { top: calc(14px + env(safe-area-inset-top, 12px)); }
+      .bottom-nav { padding-bottom: max(28px, env(safe-area-inset-bottom, 28px)); }
+    }
   </style>
 </head>
 <body>
@@ -622,7 +642,7 @@
       <div class="nav-item" data-screen="anomaly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Anomaly Detection<span class="nav-tag">AI</span></div>
       <div class="sidebar-label" style="margin-top:24px;">Reference</div>
       <div class="nav-item" data-screen="typography"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography<span class="nav-tag">DS</span></div>
-      <div class="sidebar-footer"><div class="sidebar-meta">v1.20.7 &middot; NYC Event Demo</div></div>
+      <div class="sidebar-footer"><div class="sidebar-meta">v1.20.8 &middot; Vroozi AI Demo</div></div>
     </aside>
     <div class="main-area">
       <span class="deck-railtext">Vroozi&nbsp;&nbsp;SpendTech&reg;</span>
@@ -668,7 +688,7 @@
             <div class="nav-item" data-screen="chatanalytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 13V9M12 13v-2M16 13V8"/></svg>Analytics Chat</div>
             <div class="nav-item" data-screen="spend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Spend Intel</div>
             <div class="nav-item" data-screen="anomaly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Anomaly Detection</div>
-            <div class="sidebar-footer"><div class="sidebar-meta">v1.20.7 &middot; Vroozi SpendTech&reg;</div></div>
+            <div class="sidebar-footer"><div class="sidebar-meta">v1.20.8 &middot; Vroozi SpendTech&reg;</div></div>
           </aside>
 
           <!-- HOME -->
@@ -902,6 +922,7 @@
                 <div class="inbox-tab" data-tab="notifs">Notifications<span class="ct" id="ctNotifs">4</span></div>
               </div>
               <div id="inboxList"></div>
+              <div class="inbox-version">v1.20.8 &middot; Vroozi AI Demo</div>
             </div>
           </div>
 
@@ -1050,7 +1071,11 @@
     // (phone/tablet), follow its physical orientation — and match the frame to
     // the device size. On a desktop (mouse), the manual toggles stay in charge.
     function isDeviceMode(){
-      return window.matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints||0) > 0;
+      var mm = window.matchMedia;
+      return mm('(pointer: coarse)').matches
+        || mm('(hover: none)').matches
+        || (navigator.maxTouchPoints||0) > 0
+        || /iPad|iPhone|Android/i.test(navigator.userAgent);
     }
     function syncFromViewport(){
       document.body.classList.toggle('device-mode', isDeviceMode());
